@@ -6,13 +6,14 @@ import os
 import matplotlib.pyplot as plt
 import math
 import csv
+import random
 
 # classes
 from clothing import Clothing
 # other imports
 from colorthief import ColorThief
+app = Flask(__name__, static_url_path='/static')
 
-app = Flask(__name__)
 
 # helper functions
 def grayscale_to_color(grayscale_value):
@@ -202,7 +203,22 @@ base_colors = {
  	'gainsboro':(220,220,220),
  	'white smoke':(245,245,245)
 }
-
+# Temp lists for the seperate categories\
+brown_colors = ['brown', 'saddle brown', 'sienna', 'chocolate', 'peru', 'sandy brown', 'burly wood', 'tan', 'rosy brown']
+green_colors = ['Green', 'Lime', 'Olive', 'green yellow', 'dark olive green', 'olive drab', 'lawn green', 'chartreuse', 'dark green', 'forest green', 'lime green', 'light green', 'pale green', 'dark sea green', 'medium spring green', 'spring green', 'sea green', 'medium aqua marine', 'medium sea green', 'light sea green', 'teal', 'dark cyan', 'aqua marine', 'cyan', 'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise']
+blue_colours = ['Blue', 'Navy', 'dark blue', 'medium blue', 'royal blue', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue', 'medium purple', 'midnight blue', 'corn flower blue', 'deep sky blue', 'dodger blue', 'light blue', 'sky blue', 'light sky blue', 'powder blue', 'cadet blue', 'steel blue', 'alice blue', 'light steel blue', 'light slate gray', 'slate gray', 'light blue', 'light sky blue', 'light steel blue']
+white_colours = ['White', 'antique white', 'beige', 'bisque', 'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'light golden rod yellow', 'light yellow', 'ivory', 'azure', 'snow', 'floral white', 'alice blue', 'ghost white', 'honeydew', 'white smoke', 'gainsboro', 'light gray', 'light steel blue', 'lavender', 'lavender blush', 'linen', 'old lace', 'papaya whip', 'sea shell', 'mint cream']
+red_colours = ['Red','Maroon','dark red', 'brown', 'firebrick', 'crimson', 'red', 'tomato', 'coral', 'indian red', 'light coral', 'dark salmon', 'salmon', 'light salmon', 'orange red']
+green_colors = ['green', 'lime', 'yellow green', 'dark olive green', 'olive drab', 'lawn green', 'chartreuse', 'green yellow', 'dark green', 'forest green', 'lime green', 'light green', 'pale green', 'dark sea green', 'medium spring green', 'spring green', 'sea green', 'medium aquamarine', 'medium sea green', 'light sea green']
+red_colors = ['dark red', 'brown', 'firebrick', 'crimson', 'red', 'tomato', 'coral', 'indian red', 'light coral', 'dark salmon', 'salmon', 'light salmon', 'orange red', 'dark orange', 'orange', 'gold', 'dark goldenrod', 'goldenrod', 'pale goldenrod']
+blue_colors = ['blue', 'royal blue', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue', 'medium purple', 'dark magenta', 'dark violet', 'dark orchid', 'medium orchid', 'purple', 'thistle', 'plum', 'violet', 'orchid', 'medium violet red', 'pale violet red', 'deep pink', 'hot pink', 'light pink', 'pink']
+white_colors = ['hite', 'snow', 'ivory', 'mint cream', 'azure', 'honeydew', 'ghost white', 'floral white', 'alice blue', 'lavender', 'light steel blue', 'light slate gray', 'slate gray', 'gainsboro', 'white smoke']
+orange_colors = ['Orange', 'dark orange', 'gold']
+purple_colors = ['purple', 'violet', 'medium violet red', 'pale violet red', 'dark magenta', 'dark violet', 'dark orchid', 'medium orchid', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue']
+black_colors = ['black']
+other_colors = ['maroon', 'olive', 'teal', 'navy', 'dark blue', 'medium blue', 'midnight blue', 'dark slate gray', 'dark cyan', 'aqua', 'cyan', 'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise', 'aquamarine', 'powder blue', 'cadet blue', 'steel blue', 'cornflower blue', 'deep sky blue', 'dodger blue', 'light blue', 'sky blue', 'light sky blue', 'papaya whip', 'sea shell', 'lavender blush', 'linen', 'old lace', 'moccasin', 'navajo white', 'peach puff', 'misty rose', 'antique white', 'beige', 'bisque', 'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'light goldenrod yellow', 'light yellow', 'saddle brown', 'sienna', 'chocolate', 'peru', 'sandy brown', 'burly wood', 'tan', 'rosy brown']
+# reference
+ref_colours = [brown_colors, green_colors, blue_colours, white_colours, red_colours, green_colors, red_colors, blue_colors, white_colors, orange_colors, purple_colors, black_colors, other_colors]
 
 
 @app.route('/')
@@ -232,8 +248,8 @@ def capture():
     # code from https://www.youtube.com/watch?v=nEYap1mupUQ
     ct = ColorThief(f'uploaded_images\{image_filename}')
     dominant_color = ct.get_color(quality=1)
-    plt.imshow([[dominant_color]])
-    plt.show()
+    #plt.imshow([[dominant_color]])
+    #plt.show()
     
     
     # euclidian distance between two colour vectors to get closest color
@@ -257,12 +273,24 @@ def capture():
         return "unknown clothing type??????"
     
     
-    with open(csv_filename, mode='a') as fileref:
+    with open(csv_filename, mode='a', newline='') as fileref:
         writer = csv.writer(fileref)
-        writer.writerow([clothing_instance.colour, clothing_instance.clothing_type])
+        writer.writerow([clothing_instance.colour, clothing_instance.clothing_type, image_filename])
 
     return "done"
 
+@app.route('/show_generated_outfits')
+def show_generated_outfits():
+    image_files = os.listdir('./uploaded_images')
+    return render_template('gallery.html', image_files=image_files)
+
+# opens the page for generated outfits
+@app.route('/generate_outfits')
+def generate_outfits():
+    # temp
+        
+        
+    return render_template('generations.html')
     
     
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Outfits</title>
+    <link rel= "stylesheet"  type= "text/css" href= "{{ url_for('static',filename='css/generations.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Outfit Planner</h1>
+    </header>
+    <button id="generate-outfits">Generate Outfits</button>
+    <button id="upload">Take Photo of Clothing</button>
+    <div class="container">
+        <h2>Generated Outfits</h2>
+        <div id="outfits-container">
+
+        </div>
+    </div>
+    
+
+
+    <script>
+        const generateOutfits = document.getElementById('generate-outfits')
+        const uploadButton = document.getElementById('upload')
+
+        uploadButton.addEventListener('click', () => {
+            window.location.href = '/';
+        })
+
+        // Generate Outfits
+        generateOutfits.addEventListener('click', () => {
+            window.location.href = '/generate_outfits';
+        })
+    </script>
+
+</body>
+</html>

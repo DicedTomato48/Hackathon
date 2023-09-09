@@ -4,69 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outfit Planner</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
-        }
-        header {
-            background-color: #008cff;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-        h1 {
-            font-size: 24px;
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px 0;
-        }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #555;
-        }
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-        }
-        canvas {
-            display: none;
-        }
-        #captured-image {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
-        }
-        #frame-container {
-            margin-top: 20px;
-        }
-    </style>
-</head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 <body>
     <header>
         <h1>Outfit Planner</h1>
@@ -75,7 +13,7 @@
         <video id="webcam" autoplay></video>
         <button id="capture">Upload Clothes</button>
         <!--<button id="view-frames">View Uploaded Clothes</button>--> 
-        <button>Generate Outfits</button>
+        <button id="generate-outfits">Generate Outfits</button>
         <canvas id="canvas" style="display: none;"></canvas>
         <img id="captured-image" src="">
         <div id="frame-container"></div>
@@ -90,16 +28,12 @@
         </select>
     </div>
     
-
-
-
-
     <script>
         const video = document.getElementById('webcam');
         const canvas = document.getElementById('canvas');
         const capturedImage = document.getElementById('captured-image');
         const captureButton = document.getElementById('capture');
-        const viewFramesButton = document.getElementById('view-frames');
+        const generateOutfits = document.getElementById('generate-outfits')
 
         // accessing the devices webcam stream
         navigator.mediaDevices
@@ -129,6 +63,15 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
         });
+
+
+        // Generate Outfits
+        generateOutfits.addEventListener('click', () => {
+            window.location.href = '/generate_outfits';
+        })
+
+
+
 
         // view stored frames
         viewFramesButton.addEventListener('click', () => {
