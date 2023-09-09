@@ -12,7 +12,7 @@ import random
 from clothing import Clothing
 # other imports
 from colorthief import ColorThief
-from colorpicking import *
+from colorpicking import color_category, base_colors
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -85,28 +85,32 @@ def capture():
     
     # euclidian distance between two colour vectors to get closest color
     basic_color_category = classify_color(dominant_color)
-    print(f'Detected color is closest to: {basic_color_category}')
     
-    clothing_color_group = None
-    # colour grouping
-    for color_group in ref_colours.keys():
-        for specific_colors in ref_colours[color_group]:
-            if basic_color_category == specific_colors:
-                clothing_color_group = color_group
-                break
+    color_list = []
+    for color in color_category:
+            if basic_color_category in color_category[color]:
+                color_list.append(color)
                 
-    print(basic_color_category)
-    print(clothing_color_group)
+    
+    print(f'Detected color is closest to: {basic_color_category}')
+    print(f"{basic_color_category} is present in the following color schemes: {', '.join(color_list)} ")
+    
     # don't need this, its just here
-    clothing_instance = Clothing(colour=clothing_color_group, clothing_type=clothing_type)
+    #clothing_instance = Clothing(colour=clothing_color_group, clothing_type=clothing_type)
     
     # save to csv database
     print(f'clothing type is {clothing_type}')
-    if clothing_type == 'Shirt':
+    if clothing_type == 'Shirtshort':
         csv_filename = 'databases\clothing_top.csv'
+    elif clothing_type == 'Shirtlong':
+        csv_filename = 'databases\clothing_top.csv'
+    elif clothing_type == 'Jacket':
+        csv_filename = 'databases\clothing_outerwear.csv'
     elif clothing_type == 'Pants':
         csv_filename = 'databases\clothing_bottom.csv'
-    elif clothing_type == 'Jacket':
+    elif clothing_type == 'Shorts':
+        csv_filename = 'databases\clothing_bottom.csv'
+    elif clothing_type == 'Knitwear':
         csv_filename = 'databases\clothing_outerwear.csv'
     elif clothing_type == 'Shoes':
         csv_filename = 'databases\clothing_shoes.csv'
@@ -130,10 +134,6 @@ def show_generated_outfits():
 def generate_outfits():
     # temp
 
-                    
-                
-        
-        
     return render_template('generations.html')
     
     

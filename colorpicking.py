@@ -156,25 +156,32 @@ base_colors = {
 }
 # Temp lists for the seperate categories\
     # REFINE THIS
-ref_colours = {
-'brown_colors' : ['brown', 'saddle brown', 'sienna', 'chocolate', 'peru', 'sandy brown', 'burly wood', 'tan', 'rosy brown'],
-'green_colors' : ['Green', 'Lime', 'Olive', 'green yellow', 'dark olive green', 'olive drab', 'lawn green', 'chartreuse', 'dark green', 'forest green', 'lime green', 'light green', 'pale green', 'dark sea green', 'medium spring green', 'spring green', 'sea green', 'medium aqua marine', 'medium sea green', 'light sea green', 'teal', 'dark cyan', 'aqua marine', 'cyan', 'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise'],
-'blue_colours' : ['Blue', 'Navy', 'dark blue', 'medium blue', 'royal blue', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue', 'medium purple', 'midnight blue', 'corn flower blue', 'deep sky blue', 'dodger blue', 'light blue', 'sky blue', 'light sky blue', 'powder blue', 'cadet blue', 'steel blue', 'alice blue', 'light steel blue', 'light slate gray', 'slate gray', 'light blue', 'light sky blue', 'light steel blue'],
-'dark_blue_colors' : ['navy', 'dark blue', 'medium blue', 'midnight blue'],
-'white_colours' : ['White', 'antique white', 'beige', 'bisque', 'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'light golden rod yellow', 'light yellow', 'ivory', 'azure', 'snow', 'floral white', 'alice blue', 'ghost white', 'honeydew', 'white smoke', 'gainsboro', 'light gray', 'light steel blue', 'lavender', 'lavender blush', 'linen', 'old lace', 'papaya whip', 'sea shell', 'mint cream'],
-'red_colours' : ['Red','Maroon','dark red', 'brown', 'firebrick', 'crimson', 'red', 'tomato', 'coral', 'indian red', 'light coral', 'dark salmon', 'salmon', 'light salmon', 'orange red'],
-'green_colors' : ['green', 'lime', 'yellow green', 'dark olive green', 'olive drab', 'lawn green', 'chartreuse', 'green yellow', 'dark green', 'forest green', 'lime green', 'light green', 'pale green', 'dark sea green', 'medium spring green', 'spring green', 'sea green', 'medium aquamarine', 'medium sea green', 'light sea green'],
-'red_colors' : ['dark red', 'brown', 'firebrick', 'crimson', 'red', 'tomato', 'coral', 'indian red', 'light coral', 'dark salmon', 'salmon', 'light salmon', 'orange red', 'dark orange', 'orange', 'gold', 'dark goldenrod', 'goldenrod', 'pale goldenrod'],
-'blue_colors' : ['blue', 'royal blue', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue', 'medium purple', 'dark magenta', 'dark violet', 'dark orchid', 'medium orchid', 'purple', 'thistle', 'plum', 'violet', 'orchid', 'medium violet red', 'pale violet red', 'deep pink', 'hot pink', 'light pink', 'pink'],
-'white_colors' : ['silver','white', 'snow', 'ivory', 'mint cream', 'azure', 'honeydew', 'ghost white', 'floral white', 'alice blue', 'lavender', 'light steel blue', 'gainsboro', 'white smoke'],
-'orange_colors' : ['Orange', 'dark orange', 'gold'],
-'purple_colors' : ['purple', 'violet', 'medium violet red', 'pale violet red', 'dark magenta', 'dark violet', 'dark orchid', 'medium orchid', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue'],
-'black_colors' : ['black'],
-'gray_colors' : ['dark slate gray','light slate gray', 'slate gray','dark gray'],
-'other_colors' : ['maroon', 'olive', 'teal' , 'dark cyan', 'aqua', 'cyan', 'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise', 'aquamarine', 'powder blue', 'cadet blue', 'steel blue', 'cornflower blue', 'deep sky blue', 'dodger blue', 'light blue', 'sky blue', 'light sky blue', 'papaya whip', 'sea shell', 'lavender blush', 'linen', 'old lace', 'moccasin', 'navajo white', 'peach puff', 'misty rose', 'antique white', 'beige', 'bisque', 'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'light goldenrod yellow', 'light yellow', 'saddle brown', 'sienna', 'chocolate', 'peru', 'sandy brown', 'burly wood', 'tan', 'rosy brown']
-}
-
-
+color_category = {}
+color_category['Red'] = ['Red','dark red','brown','firebrick','crimson','red','tomato','coral','indian red',
+'light coral','dark salmon','salmon','light salmon','orange red']
+color_category['Green'] = ['Green', 'Lime','dark khaki','khaki','olive','yellow green','dark olive green','olive drab','lawn green',
+'chartreuse','green yellow','dark green','forest green','lime','lime green','light green','pale green','dark sea green',
+'medium spring green','spring green','sea green', 'medium aqua marine','medium sea green','light sea green','aqua marine','mint cream','honeydew']
+color_category['Blue'] = ['Blue', 'Cyan', 'Teal', 'light sea green', 'dark slate gray', 'teal', 'dark cyan', 'aqua', 'cyan',
+'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise', 'aqua marine', 'powder blue',
+'cadet blue', 'steel blue', 'corn flower blue', 'deep sky blue', 'dodger blue', 'light blue', 'sky blue',
+'light sky blue', 'midnight blue', 'navy', 'dark blue', 'medium blue', 'blue', 'royal blue', 'light steel blue',
+'alice blue', 'azure']
+color_category['Black'] = ['Black', 'Grey', 'Navy', 'slate gray', 'light slate gray', 'black', 'dark gray', 'silver', 'light gray']
+color_category['White'] = ['White', 'Grey', 'pale golden rod', 'light cyan', 'antique white', 'beige', 'bisque',
+'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'moccasin', 'navajo white', 'peach puff', 'linen',
+'old lace', 'papaya whip', 'sea shell', 'mint cream', 'floral white', 'alice blue', 'ghost white',
+'honeydew', 'ivory', 'snow', 'gainsboro', 'white smoke']
+color_category['Yellow'] = ['Yellow', 'gold', 'dark golden rod', 'golden rod', 'pale golden rod', 'khaki', 'yellow',
+'lemon chiffon', 'light golden rod yellow', 'light yellow']
+color_category['Purple'] = ['Magenta', 'Purple', 'corn flower blue', 'blue violet', 'indigo', 'dark slate blue', 'slate blue',
+'medium slate blue', 'medium purple', 'dark magenta', 'dark violet', 'dark orchid', 'medium orchid', 'purple',
+'thistle', 'plum', 'violet', 'orchid', 'medium violet red', 'pale violet red', 'rosy brown']
+color_category['Pink'] = ['deep pink', 'hot pink', 'light pink', 'pink', 'misty rose', 'lavender blush', 'lavender']
+color_category['Brown'] = ['Maroon', 'Olive', 'brown', 'firebrick', 'saddle brown', 'sienna', 'chocolate', 'peru',
+'sandy brown', 'burly wood', 'tan']
+color_category['Orange'] = ['Orange', 'tomato', 'coral', 'dark salmon', 'light salmon', 'orange red', 'dark orange',
+'orange', 'bisque', 'sandy brown']
 
 color_palettes = {
     'Pallete1' : ['white_colors', 'brown_colors', 'black_colors'],
@@ -187,3 +194,43 @@ color_palettes = {
 }
 
 
+color_weather_mapping = {
+    'Red': 'Rainy',
+    'Green': 'Sunny',
+    'Blue': 'Rainy',
+    'Black': 'Foggy',
+    'White': 'Cloudy',
+    'Yellow': 'Sunny',
+    'Purple': 'Rainy',
+    'Pink': 'Sunny',
+    'Brown': 'Sunny',
+    'Orange': 'Sunny',
+}
+
+def is_light_color(rgb: tuple[int,int,int]):
+	# Calculate the brightness of the color using the formula
+	# brightness = 0.299 * R + 0.587 * G + 0.114 * B
+	return 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]
+
+	# Return True if brightness is greater than or equal to 128, indicating a light color
+def separate_dark_bright():
+	light_colors = []
+	dark_colors = []
+
+	for color in color_category.values():
+		for specific_color in color:
+			brightness = is_light_color(base_colors[specific_color])
+			if brightness >= 128:
+				light_colors.append(specific_color)
+			elif brightness < 128:
+				dark_colors.append(specific_color)
+
+	#Dictionaries for light and dark colors with their RGB values
+	print("Light Colors:")
+	print(light_colors)
+
+	print("\nDark Colors:")
+	print(dark_colors)
+
+if __name__ == '__main__':
+	separate_dark_bright()
