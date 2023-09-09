@@ -1,1 +1,11 @@
-colour, type, image_filename
+color, type, image_filename
+,Shirt,1.jpg
+white_colors,Shirt,2.jpg
+,Shirt,3.jpg
+gray_colors,Shirt,1.jpg
+gray_colors,Shirt,2.jpg
+gray_colors,Shirt,3.jpg
+gray_colors,Shirt,1.jpg
+gray_colors,Shirt,2.jpg
+gray_colors,Shirt,3.jpg
+gray_colors,Shirt,1.jpg
