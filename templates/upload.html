@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit Planner</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #008cff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+        canvas {
+            display: none;
+        }
+        #captured-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        #frame-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Outfit Planner</h1>
+    </header>
+    <div class="container">
+        <video id="webcam" autoplay></video>
+        <button id="capture">Upload Clothes</button>
+        <!--<button id="view-frames">View Uploaded Clothes</button>--> 
+        <button>Generate Outfits</button>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <img id="captured-image" src="">
+        <div id="frame-container"></div>
+
+
+        <label for="clothing-type">Select Clothing Type:</label>
+        <select id="clothing-type">
+            <option value="Shirt">Shirt</option>
+            <option value="Pants">Pants</option>
+            <option value="Jacket">Jacket</option>
+            <option value="Shoes">Shoes</option>
+        </select>
+    </div>
+    
+
+
+
+
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('canvas');
+        const capturedImage = document.getElementById('captured-image');
+        const captureButton = document.getElementById('capture');
+        const viewFramesButton = document.getElementById('view-frames');
+
+        // accessing the devices webcam stream
+        navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+            });
+
+        // Capture a frame from the webcam stream
+        captureButton.addEventListener('click', () => {
+            const clothingType = document.getElementById('clothing-type').value;
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // converting frame to image then displaying
+            capturedImage.src = canvas.toDataURL('image/png');
+            // Send the captured frame to your Flask app for storage
+            const imageData = canvas.toDataURL('image/png');
+            fetch('/capture', {
+                method: 'POST',
+                body: new URLSearchParams({ 'imageData': imageData, 'clothingType': clothingType}),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+        });
+
+        // view stored frames
+        viewFramesButton.addEventListener('click', () => {
+            fetch('/view_frames')
+                .then(response => response.json())
+                .then(data => {
+                    // Display stored frames in the console (you can display them on the page as needed)
+                    console.log(data);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import base64 # decoding camera ...nevermind
 import os
 import matplotlib.pyplot as plt
 import math
+import csv
 
 # classes
 from clothing import Clothing
@@ -212,6 +213,7 @@ def index():
 def capture():
     global image_counter
     image_data = request.form['imageData']
+    clothing_type = request.form['clothingType']
     image_bytes = base64.b64decode(image_data.split(',')[1])
     nparr = np.frombuffer(image_bytes, np.uint8)
     # decoding
@@ -238,8 +240,27 @@ def capture():
     basic_color_category = classify_color(dominant_color)
     print(f'Detected color is closest to: {basic_color_category}')
     
+    # don't need this, its just here
+    clothing_instance = Clothing(colour=basic_color_category, clothing_type=clothing_type)
+    
+    # save to csv database
+    print(f'clothing type is {clothing_type}')
+    if clothing_type == 'Shirt':
+        csv_filename = 'databases\clothing_top.csv'
+    elif clothing_type == 'Pants':
+        csv_filename = 'databases\clothing_bottom.csv'
+    elif clothing_type == 'Jacket':
+        csv_filename = 'databases\clothing_outerwear.csv'
+    elif clothing_type == 'Shoes':
+        csv_filename = 'databases\clothing_shoes.csv'
+    else:
+        return "unknown clothing type??????"
     
     
+    with open(csv_filename, mode='a') as fileref:
+        writer = csv.writer(fileref)
+        writer.writerow([clothing_instance.colour, clothing_instance.clothing_type])
+
     return "done"
 
     
