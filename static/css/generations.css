@@ -18,11 +18,15 @@
     padding: 20px 0;
   }
   
-  
+  .container h2 li {
+    list-style-type: none;
+    
+  }
   h1 {
     font-size: 24px;
     margin: 0;
   }
+  
   .container {
     max-width: 800px;
     margin: 20px auto;

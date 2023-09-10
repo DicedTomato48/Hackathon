@@ -13,7 +13,7 @@ import random
 from clothing import Clothing
 # other imports
 from colorthief import ColorThief
-from colorpicking import *
+from colorpicking import color_category, base_colors
 from color_mapping import *
 from weather_api import *
 
@@ -164,10 +164,6 @@ def generate_outfits():
         outfit_component_locations.append('databases\clothing_outerwear.csv')
     
     
-    um, most_probable, det, max_temp, min_temp = current.get_hourly_weather_forecast()
-    available_colors = all_colours_total(most_probable, max_temp)
-    print(f'total available colors are {available_colors}')
-    
     for clothing_type in outfit_component_locations:
         print(clothing_type)
         #random_color = random.choice(available_colors)
@@ -183,15 +179,20 @@ def generate_outfits():
                     if row['color'] == color:
                         selected_article = row['image_filename']
                         new_outfit.append(selected_article)
-                        
+                        break
     print('x')      
     for article in new_outfit:
         print(article) 
         print('x')
-    
-    return render_template('generations.html', outfits = new_outfit)
-    
-    
+
+    current = Weather()   
+    um, most_probable, det, max_temp, min_temp = current.get_hourly_weather_forecast()
+    weather_message = f"""Todays weather is {most_probable} with a maximum temperature of {max_temp} Degrees,
+    as such it is recommended you wear shades of these colours: {available_colors} . Based on the conditions, if there is are suitable combinations of clothing, they are:
+    Tops:"""
+    return render_template('generations.html', outfits = new_outfit, weather_message=weather_message)
+
+
 
 @app.route('/view_frames')
 def view_frames():

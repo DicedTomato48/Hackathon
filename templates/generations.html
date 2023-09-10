@@ -13,6 +13,11 @@
 
     <div class="container">
         <h2>Generated Outfit</h2>
+        <h2>
+            {% for item in weather_message %}
+                <li>{{item}}</li?
+            {% endfor %}
+        </h2>
         <div id="buttons">
             <button id="generate-outfits">Generate Outfits</button>
             <button id="upload">Take Photo of Clothing</button>
