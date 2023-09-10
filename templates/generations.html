@@ -10,12 +10,17 @@
     <header>
         <h1>Outfit Planner</h1>
     </header>
-    <button id="generate-outfits">Generate Outfits</button>
-    <button id="upload">Take Photo of Clothing</button>
-    <div class="container">
-        <h2>Generated Outfits</h2>
-        <div id="outfits-container">
 
+    <div class="container">
+        <h2>Generated Outfit</h2>
+        <div id="buttons">
+            <button id="generate-outfits">Generate Outfits</button>
+            <button id="upload">Take Photo of Clothing</button>
+        </div>
+        <div id="outfits-container">
+            {% for filename in outfits %}
+            <img src="{{ url_for('uploaded_images', filename=filename) }}" alt="Image">
+            {% endfor %}
         </div>
     </div>
 

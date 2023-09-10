@@ -157,31 +157,26 @@ base_colors = {
 # Temp lists for the seperate categories\
     # REFINE THIS
 color_category = {}
-color_category['Red'] = ['Red','dark red','brown','firebrick','crimson','red','tomato','coral','indian red',
-'light coral','dark salmon','salmon','light salmon','orange red']
-color_category['Green'] = ['Green', 'Lime','dark khaki','khaki','olive','yellow green','dark olive green','olive drab','lawn green',
-'chartreuse','green yellow','dark green','forest green','lime','lime green','light green','pale green','dark sea green',
-'medium spring green','spring green','sea green', 'medium aqua marine','medium sea green','light sea green','aqua marine','mint cream','honeydew']
-color_category['Blue'] = ['Blue', 'Cyan', 'Teal', 'light sea green', 'dark slate gray', 'teal', 'dark cyan', 'aqua', 'cyan',
-'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise', 'aqua marine', 'powder blue',
-'cadet blue', 'steel blue', 'corn flower blue', 'deep sky blue', 'dodger blue', 'light blue', 'sky blue',
-'light sky blue', 'midnight blue', 'navy', 'dark blue', 'medium blue', 'blue', 'royal blue', 'light steel blue',
-'alice blue', 'azure']
-color_category['Black'] = ['Black', 'Grey', 'Navy', 'slate gray', 'light slate gray', 'black', 'dark gray', 'silver', 'light gray']
-color_category['White'] = ['White', 'Grey', 'pale golden rod', 'light cyan', 'antique white', 'beige', 'bisque',
-'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'moccasin', 'navajo white', 'peach puff', 'linen',
-'old lace', 'papaya whip', 'sea shell', 'mint cream', 'floral white', 'alice blue', 'ghost white',
-'honeydew', 'ivory', 'snow', 'gainsboro', 'white smoke']
-color_category['Yellow'] = ['Yellow', 'gold', 'dark golden rod', 'golden rod', 'pale golden rod', 'khaki', 'yellow',
-'lemon chiffon', 'light golden rod yellow', 'light yellow']
-color_category['Purple'] = ['Magenta', 'Purple', 'corn flower blue', 'blue violet', 'indigo', 'dark slate blue', 'slate blue',
-'medium slate blue', 'medium purple', 'dark magenta', 'dark violet', 'dark orchid', 'medium orchid', 'purple',
-'thistle', 'plum', 'violet', 'orchid', 'medium violet red', 'pale violet red', 'rosy brown']
-color_category['Pink'] = ['deep pink', 'hot pink', 'light pink', 'pink', 'misty rose', 'lavender blush', 'lavender']
-color_category['Brown'] = ['Maroon', 'Olive', 'brown', 'firebrick', 'saddle brown', 'sienna', 'chocolate', 'peru',
-'sandy brown', 'burly wood', 'tan']
-color_category['Orange'] = ['Orange', 'tomato', 'coral', 'dark salmon', 'light salmon', 'orange red', 'dark orange',
-'orange', 'bisque', 'sandy brown']
+color_category['Light Red'] = ['tomato', 'coral', 'light coral', 'dark salmon', 'salmon', 'light salmon']
+color_category['Dark Red'] = ['Red', 'dark red', 'brown', 'firebrick', 'crimson', 'red', 'indian red', 'orange red']
+color_category['Light Green'] = ['Green', 'Lime', 'dark khaki', 'khaki', 'yellow green', 'lawn green', 'chartreuse', 'green yellow', 'lime', 'lime green', 'light green', 'pale green', 'dark sea green', 'medium spring green', 'spring green', 'medium aqua marine', 'medium sea green', 'light sea green', 'aqua marine', 'mint cream', 'honeydew']
+color_category['Dark Green'] = ['olive', 'dark olive green', 'olive drab', 'dark green', 'forest green', 'sea green']
+color_category['Light Blue'] =  ['Cyan', 'light sea green', 'aqua', 'cyan', 'light cyan', 'dark turquoise', 'turquoise', 'medium turquoise', 'pale turquoise', 'aqua marine', 'powder blue', 'cadet blue', 'corn flower blue', 'deep sky blue', 'light blue', 'sky blue', 'light sky blue', 'light steel blue', 'alice blue', 'azure']
+color_category['Dark Blue'] = ['Blue', 'Teal', 'dark slate gray', 'teal', 'dark cyan', 'steel blue', 'dodger blue', 'midnight blue', 'navy', 'dark blue', 'medium blue', 'blue', 'royal blue']
+color_category['Light Black'] =  ['light slate gray', 'dark gray', 'silver', 'light gray']
+color_category['Dark Black'] = ['Black', 'Grey', 'Navy', 'slate gray', 'black']
+color_category['Light White'] =  ['White', 'pale golden rod', 'light cyan', 'antique white', 'beige', 'bisque', 'blanched almond', 'wheat', 'corn silk', 'lemon chiffon', 'moccasin', 'navajo white', 'peach puff', 'linen', 'old lace', 'papaya whip', 'sea shell', 'mint cream', 'floral white', 'alice blue', 'ghost white', 'honeydew', 'ivory', 'snow', 'gainsboro', 'white smoke']
+color_category['Dark White'] = ['Grey']
+color_category['Light Yellow'] = ['Yellow', 'gold', 'dark golden rod', 'golden rod', 'pale golden rod', 'khaki', 'yellow', 'lemon chiffon', 'light golden rod yellow', 'light yellow']
+color_category['Dark Yellow'] = []
+color_category['Light Purple'] = ['corn flower blue', 'medium purple', 'medium orchid', 'thistle', 'plum', 'violet', 'orchid', 'pale violet red', 'rosy brown']
+color_category['Dark Purple'] = ['Magenta', 'Purple', 'blue violet', 'indigo', 'dark slate blue', 'slate blue', 'medium slate blue', 'dark magenta', 'dark violet', 'dark orchid', 'purple', 'medium violet red']
+color_category['Light Pink'] = ['hot pink', 'light pink', 'pink', 'misty rose', 'lavender blush', 'lavender']
+color_category['Dark Pink'] = ['deep pink']
+color_category['Light Brown'] = ['peru', 'sandy brown', 'burly wood', 'tan']
+color_category['Dark Brown'] = ['Maroon', 'Olive', 'brown', 'firebrick', 'saddle brown', 'sienna', 'chocolate']
+color_category['Light Orange'] = ['Orange', 'tomato', 'coral', 'dark salmon', 'light salmon', 'dark orange', 'orange', 'bisque', 'sandy brown']
+color_category['Dark Orange'] =['orange red']
 
 color_palettes = {
     'Pallete1' : ['white_colors', 'brown_colors', 'black_colors'],
@@ -194,18 +189,7 @@ color_palettes = {
 }
 
 
-color_weather_mapping = {
-    'Red': 'Rainy',
-    'Green': 'Sunny',
-    'Blue': 'Rainy',
-    'Black': 'Foggy',
-    'White': 'Cloudy',
-    'Yellow': 'Sunny',
-    'Purple': 'Rainy',
-    'Pink': 'Sunny',
-    'Brown': 'Sunny',
-    'Orange': 'Sunny',
-}
+
 
 def is_light_color(rgb: tuple[int,int,int]):
 	# Calculate the brightness of the color using the formula
@@ -213,24 +197,26 @@ def is_light_color(rgb: tuple[int,int,int]):
 	return 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]
 
 	# Return True if brightness is greater than or equal to 128, indicating a light color
-def separate_dark_bright():
-	light_colors = []
-	dark_colors = []
 
-	for color in color_category.values():
-		for specific_color in color:
-			brightness = is_light_color(base_colors[specific_color])
-			if brightness >= 128:
-				light_colors.append(specific_color)
-			elif brightness < 128:
-				dark_colors.append(specific_color)
+light_colors = {}
+dark_colors = {}
 
-	#Dictionaries for light and dark colors with their RGB values
-	print("Light Colors:")
-	print(light_colors)
+for base_color in color_category:
+	light_colors[base_color] = []
+	dark_colors[base_color] = []
 
-	print("\nDark Colors:")
-	print(dark_colors)
+	for specific_colors in color_category[base_color]:
+		brightness = is_light_color(base_colors[specific_colors])
+		if brightness >= 128:
+			light_colors[base_color].append(specific_colors)
+		elif brightness < 128:
+			dark_colors[base_color].append(specific_colors)
 
-if __name__ == '__main__':
-	separate_dark_bright()
+#Dictionaries for light and dark colors with their RGB values
+
+# if __name__ == '__main__':
+# 	print("Light Colors:")
+# 	print(light_colors)
+
+# 	print("\nDark Colors:")
+# 	print(dark_colors)

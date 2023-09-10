@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, send_from_directory
 import cv2
 import numpy as np # This might be needed.
 import base64 # decoding camera ...nevermind
@@ -8,15 +8,26 @@ import math
 import csv
 import random
 
+
 # classes
 from clothing import Clothing
 # other imports
 from colorthief import ColorThief
-from colorpicking import color_category, base_colors
+from colorpicking import *
+from color_mapping import *
+from weather_api import *
 
 app = Flask(__name__, static_url_path='/static')
 
+import csv
 
+ref = ['databases\clothing_top.csv', 'databases\clothing_shoes.csv', 'databases\clothing_bottom.csv', 'databases\clothing_outerwear.csv']
+for i in range(len(ref)):
+    header = ["color", "type", "image_filename"]
+    csv_file_path = ref[i]
+    with open(csv_file_path, mode='w', newline='') as fileref:
+        csv_writer = csv.writer(fileref)
+        csv_writer.writerow(header)
 
 # helper functions
 def grayscale_to_color(grayscale_value):
@@ -51,6 +62,7 @@ captured_frames = []
 image_counter = 1
 UPLOAD_FOLDER = 'uploaded_images'
 clothing_categories = ["Shirt", "Pants","Shoes"]
+captured_colors = []
 
 @app.route('/')
 def index():
@@ -95,8 +107,9 @@ def capture():
     print(f'Detected color is closest to: {basic_color_category}')
     print(f"{basic_color_category} is present in the following color schemes: {', '.join(color_list)} ")
     
-    # don't need this, its just here
-    #clothing_instance = Clothing(colour=clothing_color_group, clothing_type=clothing_type)
+    # color_list[0] is the general colour .... idk why we made it a list????
+    # basic_color_category is the specific color
+    clothing_instance = Clothing(colour=basic_color_category, clothing_type=clothing_type)
     
     # save to csv database
     print(f'clothing type is {clothing_type}')
@@ -121,9 +134,16 @@ def capture():
     with open(csv_filename, mode='a', newline='') as fileref:
         writer = csv.writer(fileref)
         writer.writerow([clothing_instance.colour, clothing_instance.clothing_type, image_filename])
+        captured_colors.append(clothing_instance.colour)
 
     return "done"
 
+@app.route('/uploaded_images/<filename>')
+def uploaded_images(filename):
+    image_folder = './uploaded_images'
+    return send_from_directory(image_folder, filename)
+
+# dead
 @app.route('/show_generated_outfits')
 def show_generated_outfits():
     image_files = os.listdir('./uploaded_images')
@@ -132,9 +152,44 @@ def show_generated_outfits():
 # opens the page for generated outfits
 @app.route('/generate_outfits')
 def generate_outfits():
-    # temp
+    weather = Weather()
+    available_colors = ret_all_colour_for_weather(weather.get_weather_details())
+    print(f'available colors are {available_colors}')
 
-    return render_template('generations.html')
+    # basic mvp
+    new_outfit = []
+    outfit_component_locations = ['databases\clothing_top.csv', 'databases\clothing_bottom.csv', 'databases\clothing_shoes.csv']
+    half_chance = random.randint(0,1)
+    if half_chance > 0.5:
+        outfit_component_locations.append('databases\clothing_outerwear.csv')
+    
+    
+    um, most_probable, det, max_temp, min_temp = current.get_hourly_weather_forecast()
+    available_colors = all_colours_total(most_probable, max_temp)
+    print(f'total available colors are {available_colors}')
+    
+    for clothing_type in outfit_component_locations:
+        print(clothing_type)
+        #random_color = random.choice(available_colors)
+        #print(random_color)
+        
+        selected_article = None
+        with open(clothing_type, newline='') as fileref:
+            reader = csv.DictReader(fileref)
+            for row in reader:
+                #new_outfit.append(row['image_filename'])
+                #break
+                for color in available_colors:
+                    if row['color'] == color:
+                        selected_article = row['image_filename']
+                        new_outfit.append(selected_article)
+                        
+    print('x')      
+    for article in new_outfit:
+        print(article) 
+        print('x')
+    
+    return render_template('generations.html', outfits = new_outfit)
     
     
 
