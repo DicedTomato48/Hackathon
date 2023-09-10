@@ -189,7 +189,7 @@ def generate_outfits():
     um, most_probable, det, max_temp, min_temp = current.get_hourly_weather_forecast()
     weather_message = f"""Todays weather is {most_probable} with a maximum temperature of {max_temp} Degrees,
     as such it is recommended you wear shades of these colours: {available_colors} . Based on the conditions, if there is are suitable combinations of clothing, they are:
-    Tops:"""
+    """
     return render_template('generations.html', outfits = new_outfit, weather_message=weather_message)
 
 
